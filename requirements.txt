@@ -1,0 +1,8 @@
+streamlit
+transformers
+torch
+spacy
+pandas
+numpy
+PyPDF2
+# med7 (optional, for advanced medical NER): https://github.com/kamalkraj/med7 
