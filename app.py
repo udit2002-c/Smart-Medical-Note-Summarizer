@@ -1,9 +1,32 @@
 import streamlit as st
 import pandas as pd
+import subprocess
+import sys
 from utils.summarizer import summarize_text
 from utils.ner_extractor import extract_medical_entities
 from utils.icd_mapper import map_to_icd
 from utils.pdf_extractor import extract_text_from_pdf, is_valid_pdf
+
+# Try to install spaCy model if not available
+@st.cache_resource
+def setup_spacy():
+    """Setup spaCy model if not available."""
+    try:
+        import spacy
+        spacy.load("en_core_web_sm")
+        return True
+    except:
+        try:
+            subprocess.check_call([
+                sys.executable, "-m", "spacy", "download", "en_core_web_sm"
+            ])
+            return True
+        except:
+            st.warning("⚠️ spaCy model not available. Using keyword-based extraction.")
+            return False
+
+# Initialize spaCy
+setup_spacy()
 
 st.set_page_config(page_title="Smart Medical Note Summarizer", layout="centered")
 st.title("🩺 Smart Medical Note Summarizer")
@@ -89,7 +112,7 @@ st.markdown("""
 - **Text Input**: Paste clinical notes directly into the text area
 - **PDF Upload**: Upload PDF files containing medical notes (text will be extracted automatically)
 - Uses a pre-trained model to summarize your notes
-- Extracts medical keywords using spaCy NER
+- Extracts medical keywords using spaCy NER or keyword-based extraction
 - Maps keywords to mock ICD codes for demo purposes
 """)
 
