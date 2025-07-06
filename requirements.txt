@@ -1,7 +1,6 @@
 streamlit
 transformers
 torch
-spacy
 pandas
 numpy
 PyPDF2

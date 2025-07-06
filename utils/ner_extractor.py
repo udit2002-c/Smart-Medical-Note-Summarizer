@@ -1,31 +1,14 @@
-import spacy
 import re
-
-# Try to load spaCy models, with graceful fallback
-try:
-    nlp = spacy.load("en_core_web_sm")
-    SPACY_AVAILABLE = True
-except Exception:
-    # Fallback: simple keyword-based extraction
-    SPACY_AVAILABLE = False
-    print("Warning: spaCy model not available. Using keyword-based extraction.")
 
 def extract_medical_entities(text):
     """
-    Extract named entities from text using spaCy or keyword-based fallback.
+    Extract medical keywords using intelligent pattern matching.
     Args:
         text (str): The clinical note.
     Returns:
-        List[Tuple[str, str]]: List of (entity, label) pairs.
+        List[Tuple[str, str]]: List of (keyword, "MEDICAL") pairs.
     """
-    if SPACY_AVAILABLE:
-        # Use spaCy for NER
-        doc = nlp(text)
-        entities = [(ent.text, ent.label_) for ent in doc.ents]
-        return entities
-    else:
-        # Fallback: keyword-based extraction
-        return extract_medical_keywords(text)
+    return extract_medical_keywords(text)
 
 def extract_medical_keywords(text):
     """
@@ -52,7 +35,22 @@ def extract_medical_keywords(text):
         r'\b(chest pain)\b',
         r'\b(shortness of breath)\b',
         r'\b(fever)\b',
-        r'\b(cough)\b'
+        r'\b(cough)\b',
+        r'\b(headache)\b',
+        r'\b(nausea)\b',
+        r'\b(vomiting)\b',
+        r'\b(dizziness)\b',
+        r'\b(fatigue)\b',
+        r'\b(swelling)\b',
+        r'\b(inflammation)\b',
+        r'\b(infection)\b',
+        r'\b(tumor|cancer)\b',
+        r'\b(arthritis)\b',
+        r'\b(obesity)\b',
+        r'\b(cholesterol)\b',
+        r'\b(thyroid)\b',
+        r'\b(kidney disease)\b',
+        r'\b(liver disease)\b'
     ]
     
     entities = []
