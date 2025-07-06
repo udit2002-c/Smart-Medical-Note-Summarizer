@@ -2,6 +2,9 @@
 
 A beginner-friendly Streamlit web app to help doctors and hospital staff quickly summarize clinical notes, extract medical keywords, and see mock ICD codes using AI.
 
+## 🌐 Live Demo
+**[Try the app online!](https://smart-medical-note-summarizer.streamlit.app)**
+
 ## Features
 - **Summarize** free-form clinical notes using a pre-trained Hugging Face model (`facebook/bart-large-cnn`).
 - **Extract medical keywords** and named entities (diagnosis, medication, symptoms) using spaCy.
@@ -19,10 +22,11 @@ A beginner-friendly Streamlit web app to help doctors and hospital staff quickly
 
 ## Setup Instructions
 
+### Local Development
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
-   cd MedSum
+   git clone https://github.com/udit2002-c/Smart-Medical-Note-Summarizer.git
+   cd Smart-Medical-Note-Summarizer
    ```
 
 2. **Install dependencies**
@@ -41,6 +45,12 @@ A beginner-friendly Streamlit web app to help doctors and hospital staff quickly
    ```bash
    streamlit run app.py
    ```
+
+### Streamlit Cloud Deployment
+1. **Fork this repository** to your GitHub account
+2. **Sign up for Streamlit Cloud** at [share.streamlit.io](https://share.streamlit.io)
+3. **Connect your GitHub account** and select this repository
+4. **Deploy** - Streamlit Cloud will automatically detect the app and deploy it
 
 ## How to Use
 
@@ -71,9 +81,11 @@ A beginner-friendly Streamlit web app to help doctors and hospital staff quickly
 
 ## File Structure
 ```
-MedSum/
+Smart-Medical-Note-Summarizer/
 ├── app.py                # Main Streamlit app
 ├── requirements.txt      # Python dependencies
+├── packages.txt          # System dependencies
+├── .streamlit/config.toml # Streamlit configuration
 ├── README.md             # Project documentation
 ├── test_app.py           # Test script for components
 └── utils/
@@ -87,6 +99,7 @@ MedSum/
 - This project is for demo/educational purposes only. ICD mapping is mocked and not for clinical use.
 - For advanced NER, consider using med7 or other medical spaCy models.
 - PDF files should contain text (not scanned images) for best results.
+- The app is optimized for Streamlit Cloud deployment.
 
 ---
 
